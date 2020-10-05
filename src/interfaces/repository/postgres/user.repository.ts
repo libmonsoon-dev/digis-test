@@ -18,7 +18,6 @@ export class PostgresUserRepository
 
   async updateUser(id: number, user: Partial<User>): Promise<Optional<User>> {
     const result = await this.update(id, user);
-    console.warn(result);
     return this.findById(id);
   }
 }

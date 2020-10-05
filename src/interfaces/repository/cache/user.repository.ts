@@ -31,7 +31,6 @@ export class RedisUserRepository implements AbstractUserRepository {
 
   async createUser(user: User): Promise<User> {
     const result = await this.repo.createUser(user);
-    console.warn(result);
     await this.saveToCache(result.id, result);
     return result;
   }
