@@ -6,6 +6,6 @@ COPY package.json yarn.lock ./
 
 RUN yarn
 
-COPY tsconfig.json tsconfig.build.json ormconfig.ts src ./
+COPY tsconfig.json tsconfig.build.json ormconfig.ts nest-cli.json src ./
 
 CMD ["yarn", "run", "start:dev"]
