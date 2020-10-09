@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { Config } from '../../models/config';
-import { User } from '../../models/user.entity';
+import { join } from 'path';
 
 @Injectable()
 export class TypeormConfig implements TypeOrmOptionsFactory {
@@ -9,6 +9,7 @@ export class TypeormConfig implements TypeOrmOptionsFactory {
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     const { config } = this;
+    const sourceRoot = join(__dirname, '..', '..');
     return {
       type: 'postgres',
       host: config.DB_HOST,
@@ -20,11 +21,11 @@ export class TypeormConfig implements TypeOrmOptionsFactory {
         connectTimeout: 1500,
         connectionLimit: 50,
       },
-      entities: [User],
+      entities: [join(sourceRoot, 'models', '*.entity.{ts,js}')],
       synchronize: false,
       //TODO: cache with ORM
       cache: false,
-      migrations: ['migrations/*.ts'],
+      migrations: [join(sourceRoot, 'migrations', '*.{ts,js}')],
       cli: {
         migrationsDir: 'migrations',
       },
