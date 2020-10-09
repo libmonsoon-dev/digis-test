@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm/index';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Gender } from './gender';
 
 @Entity('user')
