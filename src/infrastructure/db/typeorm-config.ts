@@ -5,7 +5,8 @@ import { join } from 'path';
 
 @Injectable()
 export class TypeormConfig implements TypeOrmOptionsFactory {
-  constructor(private readonly config: Config) {}
+  constructor(private readonly config: Config) {
+  }
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     const { config } = this;
@@ -25,7 +26,7 @@ export class TypeormConfig implements TypeOrmOptionsFactory {
       synchronize: false,
       //TODO: cache with ORM
       cache: false,
-      migrations: [join(sourceRoot, 'migrations', '*.{ts,js}')],
+      migrations: ['migrations/*.ts'],
       cli: {
         migrationsDir: 'migrations',
       },
