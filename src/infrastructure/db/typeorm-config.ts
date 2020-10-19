@@ -10,7 +10,7 @@ export class TypeormConfig implements TypeOrmOptionsFactory {
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     const { config } = this;
-    const sourceRoot = join(__dirname, '..', '..');
+    const projectRoot = join(__dirname, '..', '..', '..');
     return {
       type: 'postgres',
       host: config.DB_HOST,
@@ -22,11 +22,11 @@ export class TypeormConfig implements TypeOrmOptionsFactory {
         connectTimeout: 1500,
         connectionLimit: 50,
       },
-      entities: [join(sourceRoot, 'models', '*.entity.{ts,js}')],
+      entities: [join(projectRoot, 'src', 'models', '*.entity.{ts,js}')],
       synchronize: false,
       //TODO: cache with ORM
       cache: false,
-      migrations: ['migrations/*.ts'],
+      migrations: [join(projectRoot, 'migrations/*.{ts,js}')],
       cli: {
         migrationsDir: 'migrations',
       },
