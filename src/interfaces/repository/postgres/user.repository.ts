@@ -1,11 +1,12 @@
 import { User } from '../../../models/user.entity';
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository } from 'typeorm/index';
 import { AbstractUserRepository } from '../user.repository';
 import { Optional } from '../../../types';
+import { BasePostgresRepository } from './base.repository';
 
 @EntityRepository(User)
 export class PostgresUserRepository
-  extends Repository<User>
+  extends BasePostgresRepository<User>
   implements AbstractUserRepository {
   findById(id: number): Promise<Optional<User>> {
     return this.findOne({ id });
